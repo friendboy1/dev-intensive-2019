@@ -3,9 +3,10 @@ package ru.skillbranch.devintensive.extensions
 import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import ru.skillbranch.devintensive.R
+import kotlin.math.roundToLong
 
 
 /**
@@ -22,14 +23,23 @@ fun Activity.hideKeyboard() {
 }
 
 fun Activity.isKeyboardOpen(): Boolean {
+    val rootView = findViewById<View>(android.R.id.content)
     val visibleBounds = Rect()
-    val rootView = findViewById<View>(R.id.content) ?: return false
     rootView.getWindowVisibleDisplayFrame(visibleBounds)
-    val screenHeight = rootView.height
-    val keypadHeight = screenHeight - visibleBounds.height()
-    return keypadHeight > screenHeight * 0.15
+    val heightDiff = rootView.height - visibleBounds.height()
+    val marginOfError = this.convertDpToPx(50F).roundToLong()
+
+    return heightDiff > marginOfError
 }
 
 fun Activity.isKeyboardClosed(): Boolean {
     return this.isKeyboardOpen().not()
+}
+
+fun Activity.convertDpToPx(dp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        this.resources.displayMetrics
+    )
 }

@@ -23,11 +23,12 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             if (checkAnswer.isEmpty()) {
                 if (status == Status.CRITICAL) {
                     question = Question.NAME
+                    status = Status.NORMAL
                     checkAnswer = "Это неправильный ответ. Давай все по новой"
                 } else {
                     checkAnswer = "Это неправильный ответ"
+                    status = status.nextStatus()
                 }
-                status = status.nextStatus()
             }
 
             "$checkAnswer\n${question.question}" to status.color
