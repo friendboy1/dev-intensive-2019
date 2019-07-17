@@ -22,7 +22,12 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             var checkAnswer: String = checkAnswer(answer)
             if (checkAnswer.isEmpty()) {
                 status = status.nextStatus()
-                checkAnswer = "Это неправильный ответ"
+                if (status == Status.CRITICAL) {
+                    checkAnswer = "Это неправильный ответ. Давай все по новой"
+                } else {
+                    checkAnswer = "Это неправильный ответ"
+                }
+
             }
 
             "$checkAnswer\n${question.question}" to status.color
