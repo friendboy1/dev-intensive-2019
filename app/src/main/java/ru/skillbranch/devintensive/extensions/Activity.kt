@@ -23,7 +23,7 @@ fun Activity.hideKeyboard() {
 
 fun Activity.isKeyboardOpen(): Boolean {
     val visibleBounds = Rect()
-    val rootView: View = findViewById(R.id.content)
+    val rootView = findViewById<View>(R.id.content) ?: return false
     rootView.getWindowVisibleDisplayFrame(visibleBounds)
     val screenHeight = rootView.height
     val keypadHeight = screenHeight - visibleBounds.height()
