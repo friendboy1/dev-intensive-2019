@@ -3,7 +3,6 @@ package ru.skillbranch.devintensive
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         setContentView(R.layout.activity_main)
 
         benderImage = iv_bender
-        textTextView = tv_textview
+        textTextView = tv_text
         messageEditText = et_message
         sendButton = iv_send
 
