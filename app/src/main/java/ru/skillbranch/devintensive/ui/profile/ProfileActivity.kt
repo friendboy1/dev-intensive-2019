@@ -10,9 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_profile_constraint.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -30,7 +29,7 @@ class ProfileActivity : AppCompatActivity() {
         //TODO set custom theme this before super and setContentView
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_constraint)
+        setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
     }
