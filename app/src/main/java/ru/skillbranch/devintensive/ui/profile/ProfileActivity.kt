@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_profile_relative.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -26,8 +27,6 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields: Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO set custom theme this before super and setContentView
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
@@ -45,6 +44,8 @@ class ProfileActivity : AppCompatActivity() {
             updateUI(it)
         })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+        viewModel.getRepositoryError().observe(this, Observer { updateRepoError(it) })
+        viewModel.getIsRepoError().observe(this, Observer { updateRepository(it) })
     }
 
     private fun updateTheme(mode: Int) {
@@ -58,6 +59,15 @@ class ProfileActivity : AppCompatActivity() {
                 value.text = it[key].toString()
             }
         }
+    }
+
+    private fun updateRepository(isError: Boolean) {
+        if (isError) et_repository.text?.clear()
+    }
+
+    private fun updateRepoError(isError: Boolean) {
+        wr_repository.isErrorEnabled = isError
+        wr_repository.error = if (isError) "Невалидный адрес репозитория" else null
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
