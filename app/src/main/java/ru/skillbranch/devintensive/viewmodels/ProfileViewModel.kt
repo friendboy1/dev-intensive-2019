@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.repository.PreferencesRepository
+import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
 /**
  * @author Andrei Khromov on 2019-08-03
