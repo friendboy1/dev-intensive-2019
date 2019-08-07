@@ -64,6 +64,7 @@ class ProfileActivity : AppCompatActivity() {
                 value.text = it[key].toString()
             }
         }
+        updateAvatar(profile)
     }
 
     private fun updateRepository(isError: Boolean) {
