@@ -3,7 +3,7 @@ package ru.skillbranch.devintensive.models
 /**
  * @author Andrei Khromov on 2019-07-17
  */
-class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
+class Bender(private var status: Status = Status.NORMAL, private var question: Question = Question.NAME) {
 
     fun askQuestion(): String = when (question) {
         Question.NAME -> Question.NAME.question

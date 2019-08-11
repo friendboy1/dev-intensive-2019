@@ -10,17 +10,14 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
 }
 
 fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
-    var time = this.time
-
-    time += when (units) {
-        TimeUnits.SECOND -> value * TimeUnits.SECOND.value
-        TimeUnits.MINUTE -> value * TimeUnits.MINUTE.value
-        TimeUnits.HOUR -> value * TimeUnits.HOUR.value
-        TimeUnits.DAY -> value * TimeUnits.DAY.value
+    return this.also {
+        time += when (units) {
+            TimeUnits.SECOND -> value * TimeUnits.SECOND.value
+            TimeUnits.MINUTE -> value * TimeUnits.MINUTE.value
+            TimeUnits.HOUR -> value * TimeUnits.HOUR.value
+            TimeUnits.DAY -> value * TimeUnits.DAY.value
+        }
     }
-
-    this.time = time
-    return this
 }
 
 fun Date.humanizeDiff(date: Date = Date()): String {
@@ -62,9 +59,7 @@ fun getTenseForm(interval: String, isPast: Boolean): String {
 }
 
 fun getPluralForm(amount: Int, units: TimeUnits): String {
-    val posAmount = abs(amount) % 100
-
-    return when (posAmount) {
+    return when (val posAmount = abs(amount) % 100) {
         1 -> Plurals.ONE.get(units)
         in 2..4 -> Plurals.FEW.get(units)
         0, in 5..19 -> Plurals.MANY.get(units)
