@@ -10,10 +10,10 @@ import ru.skillbranch.devintensive.repositories.PreferencesRepository
  */
 class App : Application() {
     companion object {
-        private var instance: App? = null
+        private lateinit var instance: App
 
         fun applicationContext() : Context {
-            return instance!!.applicationContext
+            return instance.applicationContext
         }
     }
 
@@ -23,6 +23,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        //TODO разобраться, вероятнее всего, нужна для автоматического переключения темы ночью
         PreferencesRepository.getAppTheme().also {
             AppCompatDelegate.setDefaultNightMode(it)
         }

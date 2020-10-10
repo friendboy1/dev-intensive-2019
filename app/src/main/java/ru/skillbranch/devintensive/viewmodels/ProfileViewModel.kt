@@ -9,6 +9,8 @@ import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
 /**
+ * ViewModel для отображения Профиля
+ *
  * @author Andrei Khromov on 2019-08-03
  */
 class ProfileViewModel : ViewModel() {
@@ -16,10 +18,10 @@ class ProfileViewModel : ViewModel() {
     private val profileData = MutableLiveData<Profile>()
     private val appTheme = MutableLiveData<Int>()
     private val repositoryError = MutableLiveData<Boolean>()
-    private val isRepoError = MutableLiveData<Boolean>()
+    private val isRepositoryError = MutableLiveData<Boolean>()
 
     init {
-        Log.d(javaClass.simpleName, "init view model")
+        Log.d(javaClass.simpleName, "init Profile ViewModel")
         profileData.value = repository.getProfile()
         appTheme.value = repository.getAppTheme()
     }
@@ -30,7 +32,7 @@ class ProfileViewModel : ViewModel() {
 
     }
 
-    fun getIsRepoError():LiveData<Boolean> = isRepoError
+    fun getIsRepositoryError():LiveData<Boolean> = isRepositoryError
 
     fun getRepositoryError(): LiveData<Boolean> = repositoryError
 
@@ -58,8 +60,8 @@ class ProfileViewModel : ViewModel() {
     }
 
 
-    fun onRepoEditCompleted(isError: Boolean) {
-        isRepoError.value = isError
+    fun onRepositoryEditComplete(isError: Boolean) {
+        isRepositoryError.value = isError
     }
 
     private fun isValidateRepository(repoText: String): Boolean {

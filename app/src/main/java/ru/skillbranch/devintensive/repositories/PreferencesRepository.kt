@@ -7,6 +7,8 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.models.Profile
 
 /**
+ * Репозиторий с данными, хранящимися в SharedPreferences
+ *
  * @author Andrei Khromov on 2019-08-03
  */
 object PreferencesRepository {
@@ -24,12 +26,25 @@ object PreferencesRepository {
         PreferenceManager.getDefaultSharedPreferences(context)
     }
 
+    /**
+     * Сохранить тему
+     *
+     * @param theme режим темы дневной/ночной
+     */
     fun saveAppTheme(theme: Int) {
         putValue(APP_THEME to theme)
     }
 
+    /**
+     * Получить тему
+     */
     fun getAppTheme(): Int = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
+    /**
+     * Сохранить профиль
+     *
+     * @param profile профиль
+     */
     fun saveProfile(profile: Profile) {
         with(profile) {
             putValue(FIRST_NAME to firstName)
@@ -42,6 +57,9 @@ object PreferencesRepository {
 
     }
 
+    /**
+     * Получить профиль
+     */
     fun getProfile() = Profile(
         prefs.getString(FIRST_NAME, "")!!,
         prefs.getString(LAST_NAME, "")!!,
@@ -53,8 +71,7 @@ object PreferencesRepository {
 
     private fun putValue(pair: Pair<String, Any>) = with(prefs.edit()) {
         val key = pair.first
-        val value = pair.second
-        when (value) {
+        when (val value = pair.second) {
             is String -> putString(key, value)
             is Int -> putInt(key, value)
             is Boolean -> putBoolean(key, value)
@@ -62,7 +79,6 @@ object PreferencesRepository {
             is Float -> putFloat(key, value)
             else -> error("Only primitives types can be stored in Shared Preferences")
         }
-
         apply()
     }
 }

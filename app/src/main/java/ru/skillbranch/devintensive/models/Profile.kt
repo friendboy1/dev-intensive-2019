@@ -16,6 +16,11 @@ data class Profile(
     private val nickName: String = Utils.transliteration("$firstName $lastName", "_")
     private val rank: String = "Junior Android Developer"
 
+    /**
+     * Преобразовать класс в Map
+     *
+     * @return мапа вида <Имя свойства> - <Значение>
+     */
     fun toMap(): Map<String, Any> = mapOf(
         "nickName" to nickName,
         "rank" to rank,

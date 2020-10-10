@@ -50,7 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
         viewModel.getRepositoryError().observe(this, Observer { updateRepoError(it) })
-        viewModel.getIsRepoError().observe(this, Observer { updateRepository(it) })
+        viewModel.getIsRepositoryError().observe(this, Observer { updateRepository(it) })
     }
 
     private fun updateTheme(mode: Int) {
@@ -91,7 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener {
-            viewModel.onRepoEditCompleted(wr_repository.isErrorEnabled)
+            viewModel.onRepositoryEditComplete(wr_repository.isErrorEnabled)
 
             if (isEditMode) saveProfileInfo()
             isEditMode = isEditMode.not()
